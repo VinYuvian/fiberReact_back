@@ -19,7 +19,7 @@ pipeline {
     stage('Build Docker Image') {
       steps {
         container('docker') {  
-          sh "docker -v"  // when we run docker in this step, we're running it via a shell on the docker build-pod container, 
+          sh "docker build -t vin1711/fiberReact-backend:${env.BUILD_ID} ."  // when we run docker in this step, we're running it via a shell on the docker build-pod container, 
           //sh "docker push vividseats/promo-app:dev"        // which is just connecting to the host docker deaemon
         }
       }

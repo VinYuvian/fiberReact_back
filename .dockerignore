@@ -1,0 +1,8 @@
+.idea
+tmp
+uploads
+.Dockerfile.comp
+.env
+backend.exe
+Fiber.exemongo-init.js
+log.log

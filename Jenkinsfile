@@ -13,14 +13,16 @@ pipeline {
     stage('Build') {
       steps {  // no container directive is needed as the maven container is the default
         sh "go version"   
-        sh "go build -o Fiber"
+        sh "go build -o Fiber_${BUILD_ID}"
       }
     }
     stage('Build Docker Image') {
       steps {
         container('docker') {  
-          sh "docker build -t vin1711/fiber_react-backend:${env.BUILD_ID} ."  // when we run docker in this step, we're running it via a shell on the docker build-pod container, 
+          withDocker(credentialsId:'dockerCred'){
+             sh "docker build -t vin1711/fiber_react-backend:${env.BUILD_ID} ."  // when we run docker in this step, we're running it via a shell on the docker build-pod container, 
           //sh "docker push vividseats/promo-app:dev"        // which is just connecting to the host docker deaemon
+          }
         }
       }
     }

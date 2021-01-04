@@ -13,7 +13,7 @@ pipeline {
     stage('Build') {
       steps {  // no container directive is needed as the maven container is the default
         sh "go version"   
-        sh "go build"
+        sh "go build -o Fiber"
       }
     }
     stage('Build Docker Image') {

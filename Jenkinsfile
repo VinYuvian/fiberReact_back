@@ -15,11 +15,9 @@ pipeline {
   
   stages {
     stage('Build') {
-      opyions{
-        checkoutToSubdirectory('/backend')
-      }
       steps {  // no container directive is needed as the maven container is the default
         sh "go version"   
+        sh "go build"
       }
     }
     stage('Build Docker Image') {

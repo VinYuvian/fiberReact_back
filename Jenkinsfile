@@ -19,7 +19,7 @@ pipeline {
     stage('Build Docker Image') {
       steps {
         container('docker') {  
-          withCredentials(usernamePassword[credentialsId:'dockerCred',usernameVariable:'user',passwordVariable:'password']){
+          withCredentials([usernamePassword(credentialsId:'dockerCred',usernameVariable:'user',passwordVariable:'password')]){
              sh "docker build -t vin1711/fiber_react-backend:${env.BUILD_ID} ." 
              sh "docker login -u ${user} -p ${password}"
              sh "docker push vin1711/fiber_react-backend:${env.BUILD_ID}"/// when we run docker in this step, we're running it via a shell on the docker build-pod container, 

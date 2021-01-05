@@ -19,7 +19,7 @@ pipeline {
     stage('Build Docker Image') {
       steps {
         container('docker') {  
-          withCredentials([usernamePassword(credentialsId:'dockerCred',usernameVariable:'user',passwordVariable:'password')]){
+          withContainerRegistry(credentialsId:'dockerCred',url:''){
             sh "docker build -t vin1711/fiber_react-backend -t vin1711/fiber_react-backend:${BUILD_ID} --build-arg BUILD_NUMBER=${BUILD_ID} ." 
             //sh "docker tag fiber_react-backend vin1711/fiber_react-backend vin1711/fiber_react-backend:${BUILD_ID}"
             sh "docker login -u ${user} -p ${password}"

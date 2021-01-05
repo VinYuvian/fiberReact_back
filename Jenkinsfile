@@ -1,7 +1,6 @@
 pipeline {
   environment{
       image_name = 'vin1711/fiber_react-backend'
-      cred = credentials('dockerCred')
     }
   agent {
     kubernetes {
@@ -36,6 +35,14 @@ pipeline {
             //when we run docker in this step, we're running it via a shell on the docker build-pod container, 
            //sh "docker push vividseats/promo-app:dev"        // which is just connecting to the host docker deaemon
          }
+      }
+    }
+    stage('deploy to kubernetes'){
+      steps{
+        withCredentials([file(credentialsId:'fiberBackend',variable:'config')]){
+            kubernetesDeploy(configs: 'secret.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins')
+                            
+        }
       }
     }
   }

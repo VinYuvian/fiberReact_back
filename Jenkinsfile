@@ -24,7 +24,7 @@ pipeline {
       steps {
           container('docker') {  
             script{
-                dockerImage=docker.build image_name '--build-args BUILD_NUMBER=${BUILD_ID}'
+                dockerImage=docker.build image_name '--build-args BUILD_NUMBER'=${BUILD_ID}
                 docker.withRegistry('',cred){
                    docker.push(dockerImage:latest)
                    docker.push(dockerImage:${BUILD_ID})

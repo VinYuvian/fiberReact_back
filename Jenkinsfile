@@ -23,11 +23,10 @@ pipeline {
       steps {
           container('docker') {  
             sh "docker build -t ${image_name} -t ${image_name}:${BUILD_ID} --build-arg BUILD_NUMBER=${BUILD_ID} ."
-            withCredentials([usernamePassword(credentialsId:'dockerCred',usernameVariable:'user',passwordVariable:'password')]){
-              sh 'docker login -u $user -p $password'
-              sh "docker push vin1711/fiber_react-backend:${BUILD_ID}"
-              sh "docker push vin1711/fiber_react-backend"
-            }
+            env.choice = input message:"please select how to proceed",parameters:[choice(name:'build_type',
+                                                                                         choices:'test\nprod\nstage\ntestPipeline'
+                                                                                         description:'Is it a pipeline check or a deployment step?)]
+            
             //sh "docker tag fiber_react-backend ${image_name} ${image_name}:${BUILD_ID}"
             // "docker login -u ${cred_USR} -p ${cred_PSW}"
             //sh "docker push vin1711/fiber_react-backend:${BUILD_ID}"
@@ -35,6 +34,20 @@ pipeline {
             //when we run docker in this step, we're running it via a shell on the docker build-pod container, 
            //sh "docker push vividseats/promo-app:dev"        // which is just connecting to the host docker deaemon
          }
+      }
+    }
+    stage('Push Image'){
+      when{
+        expression{
+          env.choice == 'prod'
+        }
+      }
+      steps{
+        withCredentials([usernamePassword(credentialsId:'dockerCred',usernameVariable:'user',passwordVariable:'password')]){
+              sh 'docker login -u $user -p $password'
+              sh "docker push vin1711/fiber_react-backend:${BUILD_ID}"
+              sh "docker push vin1711/fiber_react-backend"
+            }
       }
     }
     stage('deploy to kubernetes'){

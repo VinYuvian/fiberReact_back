@@ -41,6 +41,7 @@ pipeline {
     stage('deploy to kubernetes'){
       withCredentials([file(credentialsId:'fiberBackend',variable:'config')]){
         sh 'echo $config'
+      }
     }
   }
 }

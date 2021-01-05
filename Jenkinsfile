@@ -24,7 +24,7 @@ pipeline {
           container('docker') {  
             sh "docker build -t ${image_name} -t ${image_name}:${BUILD_ID} --build-arg BUILD_NUMBER=${BUILD_ID} ."
             env.choice = input message:"please select how to proceed",parameters:[choice(name:'build_type',
-                                                                                         choices:'test\nprod\nstage\ntestPipeline'
+                                                                                         choices:'test\nprod\nstage\ntestPipeline',
                                                                                          description:'Is it a pipeline check or a deployment step?)]
             
             //sh "docker tag fiber_react-backend ${image_name} ${image_name}:${BUILD_ID}"

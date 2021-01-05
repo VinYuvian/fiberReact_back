@@ -23,8 +23,8 @@ pipeline {
     stage('Build Docker Image') {
       steps {
           container('docker') {  
-            sh "docker build -t vin1711/fiber_react-backend -t ${image_name}:${BUILD_ID} --build-arg BUILD_NUMBER=${BUILD_ID} ." 
-            sh "docker tag fiber_react-backend ${image_name} ${image_name}:${BUILD_ID}"
+            sh "docker build -t ${image_name} -t ${image_name}:${BUILD_ID} --build-arg BUILD_NUMBER=${BUILD_ID} ." 
+            //sh "docker tag fiber_react-backend ${image_name} ${image_name}:${BUILD_ID}"
             sh "docker login -u ${cred_USER} -p ${cred_PSW}"
             sh "docker push vin1711/fiber_react-backend:${BUILD_ID}"
             sh "docker push vin1711/fiber_react-backend"/// when we run docker in this step, we're running it via a shell on the docker build-pod container, 

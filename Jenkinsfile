@@ -52,11 +52,13 @@ pipeline {
             }
       }
     }
-    sta`ge('deploy to kubernetes'){`'
+    stage('deploy to kubernetes'){
       steps{
         withCredentials([file(credentialsId:'fiberBackend',variable:'config')]){
-            sh 'env.config=`$(cat tmp/pids/unicorn.pid)`'
-            kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins')
+          script{
+            env.config=`$(cat $config)`
+          }
+          kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins')
                             
         }
       }

@@ -20,9 +20,11 @@ pipeline {
       steps {
           container('docker') {  
             script{
-                dockerImage=docker.build -t vin1711/fiber_react-backend
-                docker.push(dockerImage:latest)
-                docker.push(dockerImage:${BUILD_ID})
+                dockerImage=docker.build vin1711/fiber_react-backend
+                docker.withRegistry{'','dockerCred'){
+                   docker.push(dockerImage:latest)
+                   docker.push(dockerImage:${BUILD_ID})
+                }
             //sh "docker build -t vin1711/fiber_react-backend -t vin1711/fiber_react-backend:${BUILD_ID} --build-arg BUILD_NUMBER=${BUILD_ID} ." 
             //sh "docker tag fiber_react-backend vin1711/fiber_react-backend vin1711/fiber_react-backend:${BUILD_ID}"
             //sh "docker login -u ${user} -p ${password}"

@@ -25,7 +25,7 @@ pipeline {
           container('docker') {  
             script{
                 dockerImage=docker.build image_name
-                docker.withRegistry{'',cred){
+                docker.withRegistry('',cred){
                    docker.push(dockerImage:latest)
                    docker.push(dockerImage:${BUILD_ID})
                 }

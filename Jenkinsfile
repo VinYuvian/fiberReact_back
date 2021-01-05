@@ -1,5 +1,5 @@
 pipeline {
-  properties{
+  options{
       pipelineTriggers([githubPush()])
   }
   agent {

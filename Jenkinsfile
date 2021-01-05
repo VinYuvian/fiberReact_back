@@ -8,6 +8,10 @@ pipeline {
       defaultContainer 'golang'  // define a default container if more than a few stages use it, will default to jnlp container
       podRetention never()
     }
+    environment{
+      image_name = 'vin1711/fiber_react-backend'
+      cred = 'dockerCred'
+    }
   }
   stages {
     stage('Build') {
@@ -20,8 +24,8 @@ pipeline {
       steps {
           container('docker') {  
             script{
-                dockerImage=docker.build vin1711/fiber_react-backend
-                docker.withRegistry{'','dockerCred'){
+                dockerImage=docker.build image_name
+                docker.withRegistry{'',cred){
                    docker.push(dockerImage:latest)
                    docker.push(dockerImage:${BUILD_ID})
                 }

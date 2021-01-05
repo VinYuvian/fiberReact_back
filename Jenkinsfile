@@ -40,7 +40,7 @@ pipeline {
     stage('deploy to kubernetes'){
       steps{
         withCredentials([file(credentialsId:'fiberBackend',variable:'config')]){
-            kubernetesDeploy(configs: 'secret.yaml', kubeconfigId:'kubeCred',secretNamespace:'jenkins')
+            kubernetesDeploy(configs: 'secret.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins')
                             
         }
       }

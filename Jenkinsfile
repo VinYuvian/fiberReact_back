@@ -1,5 +1,4 @@
 pipeline {
-  pipelineTriggers([githubPush()])
   agent {
     kubernetes {
       cloud 'kubernetes'

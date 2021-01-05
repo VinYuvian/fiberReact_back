@@ -18,16 +18,20 @@ pipeline {
     }
     stage('Build Docker Image') {
       steps {
-        container('docker') {  
-          withContainerRegistry(credentialsId:'dockerCred',url:''){
-            sh "docker build -t vin1711/fiber_react-backend -t vin1711/fiber_react-backend:${BUILD_ID} --build-arg BUILD_NUMBER=${BUILD_ID} ." 
+          container('docker') {  
+            script{
+                dockerImage=docker.build -t vin1711/fiber_react-backend
+                docker.push(dockerImage:latest)
+                docker.push(dockerImage:${BUILD_ID})
+            //sh "docker build -t vin1711/fiber_react-backend -t vin1711/fiber_react-backend:${BUILD_ID} --build-arg BUILD_NUMBER=${BUILD_ID} ." 
             //sh "docker tag fiber_react-backend vin1711/fiber_react-backend vin1711/fiber_react-backend:${BUILD_ID}"
-            sh "docker login -u ${user} -p ${password}"
-            sh "docker push vin1711/fiber_react-backend:${BUILD_ID}"
-            sh "docker push vin1711/fiber_react-backend"/// when we run docker in this step, we're running it via a shell on the docker build-pod container, 
+            //sh "docker login -u ${user} -p ${password}"
+            //sh "docker push vin1711/fiber_react-backend:${BUILD_ID}"
+            //sh "docker push vin1711/fiber_react-backend"/// when we run docker in this step, we're running it via a shell on the docker build-pod container, 
            //sh "docker push vividseats/promo-app:dev"        // which is just connecting to the host docker deaemon
-          }
-        }
+         
+            }
+         }
       }
     }
   }

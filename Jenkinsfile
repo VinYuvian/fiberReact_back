@@ -1,7 +1,6 @@
 pipeline {
   environment{
       image_name = 'vin1711/fiber_react-backend'
-      cred = credentials('dockerCred')
     }
   agent {
     kubernetes {
@@ -41,7 +40,8 @@ pipeline {
     stage('deploy to kubernetes'){
       steps{
         withCredentials([file(credentialsId:'fiberBackend',variable:'config')]){
-          sh 'echo $config'
+            kubernetesDeploy(configs: 'secret.yaml', kubeconfigId:'kubeCred',secretNamespace:'jenkins')
+                            
         }
       }
     }

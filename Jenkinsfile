@@ -25,7 +25,7 @@ pipeline {
           container('docker') {  
             sh "docker build -t ${image_name} -t ${image_name}:${BUILD_ID} --build-arg BUILD_NUMBER=${BUILD_ID} ."
             withCredentials([usernamePassword(credentialsId:'dockerCred',usernameVariable:user,passwordVariable:password)]){
-              sh "docker login -u ${user} -p ${password}"
+              sh 'docker login -u $user -p $password'
               sh "docker push vin1711/fiber_react-backend:${BUILD_ID}"
               sh "docker push vin1711/fiber_react-backend"
             }

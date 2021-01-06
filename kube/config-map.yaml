@@ -5,5 +5,5 @@ metadata:
   namespace: jenkins
 data:
   config.env: |
-    ${env.conf}
+    ${conf}
 

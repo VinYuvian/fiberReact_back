@@ -63,10 +63,7 @@ pipeline {
              echo "${data.data}"
              data=['data':"${conf}"]
              echo "${data.data}"
-             sh '''if [ -e /kube/config-map.yaml ]; then
-                       rm -f /kube/config-map.yaml
-                   fi''' 
-             data=writeYaml(file:'kube/config-map.yaml',data:"${data}")
+             data=writeYaml(file:'kube/config-map.yaml',data:"${data}",overwrite:true)
              echo "${data}"
            }
            

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: fiber_conf
+  name: fiber-conf
 data:
   config.env: |
     $conf

@@ -12,10 +12,6 @@ spec:
       labels:
         name: fiber
     spec:
-      volumes:
-      - name: fiber-conf
-        configMap:
-          name: fiber-conf
       containers:
       - name: fiber
         image: nginx:latest
@@ -25,3 +21,7 @@ spec:
         volumeMounts:
         - name: fiber-conf
           mountPath: .env
+      volumes:
+      - name: fiber-conf
+        configMap:
+          name: fiber-conf

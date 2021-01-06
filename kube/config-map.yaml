@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: fiber-conf
+  namespace: jenkins
 data:
   config.env: |
     $conf

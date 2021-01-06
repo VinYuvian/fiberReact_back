@@ -57,12 +57,13 @@ pipeline {
          withCredentials([file(credentialsId:'fiberBackend',variable:'file')]){
            script{
              env.conf=sh(returnStdout:true,script:"cat $file")
-             for i in $conf;
-             do
-               echo $i;
-             done
-             data=readYaml(file:'kube/config-map.yaml')
            }
+      
+           sh '''for i in $conf
+                 do
+                   echo "$i"
+                 done'''
+           data=readYaml(file:'kube/config-map.yaml')
            sh "echo $data"
            //kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)                   
         }

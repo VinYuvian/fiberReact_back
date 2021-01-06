@@ -58,7 +58,7 @@ pipeline {
               script{
                 env.conf=sh(returnStdout:true,script:"cat $file").trim()
               }
-              kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins')                   
+              kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)                   
         }
       }
     }

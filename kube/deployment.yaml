@@ -8,12 +8,14 @@ spec:
       name: fiber
   template:
     metadata:
-      name: fiber
-    volumes:
+      labels:
+        name: fiber
+    spec:
+      volumes:
       - name: fiber-conf
         configMaps:
           name: fiber-conf
-    containers:
+      containers:
       - name: fiber
         image: nginx
         ports:

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fiber-deploy
+spec:
+  selector: 
+    matchLabels:
+      name: fiber
+  template:
+    metadata:
+      name: fiber
+    volumes:
+      configMaps:
+        - name: fiber-conf
+    containers:
+      - name: fiber
+        image: nginx
+        ports:
+          - name: http 
+            containerPort: 3000
+        volumeMount:
+          - name: fiber-conf
+            mountPath: .env

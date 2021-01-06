@@ -70,7 +70,7 @@ pipeline {
              echo "${datas}"
            }
            
-           //kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)                   
+           kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)                   
         }
       }
     }

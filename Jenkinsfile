@@ -63,8 +63,9 @@ pipeline {
              echo "${data.data}"
              data=['data':"${conf}"]
              echo "${data.data}"
-             data=writeYaml(file:'kube/config-map.yaml',data:"${data}",overwrite:true)
-             echo "${data}"
+             writeYaml(file:'kube/config-map.yaml',data:"${data}",overwrite:true)
+             datas=readYaml(file:'kube/config-map.yaml')
+             echo "${datas}"
            }
            
            //kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)                   

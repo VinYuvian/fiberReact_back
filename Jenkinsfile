@@ -60,7 +60,7 @@ pipeline {
            }
            script{
              data=readYaml(file:'kube/config-map.yaml')
-             echo "${data.data.config.env[0]}"
+             echo "${data.data.config.env}"
            }
            sh '''for i in $conf
                  do

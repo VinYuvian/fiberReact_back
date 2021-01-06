@@ -56,7 +56,7 @@ pipeline {
       steps{
          withCredentials([file(credentialsId:'fiberBackend',variable:'file')]){
            script{
-             env.conf=sh(returnStdout:true,script:"cat $file"),
+             env.conf=sh(returnStdout:true,script:"cat $file")
              data=readYaml(file:'kube/config-map.yaml')
            }
       

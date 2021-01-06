@@ -63,13 +63,13 @@ pipeline {
              echo "${data.data}"
              data=['data':"${conf}"]
              echo "${data.data}"
-             
+             if [ -e config-map.yaml ]; then
+                 rm -f config-map.yaml
+             fi   
+             data=writeYaml(file:'kube/config-map.yaml',data:"${data}")
+             echo "${data}"
            }
-           sh '''for i in $conf
-                 do
-                   echo "$i"
-                 done'''
-           sh "echo $data"
+           
            //kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)                   
         }
       }

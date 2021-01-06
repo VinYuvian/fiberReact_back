@@ -61,8 +61,8 @@ pipeline {
            script{
              data=readYaml(file:'kube/config-map.yaml')
              echo "${data.data}"
-             data=['data':"${conf}"]
-             echo "${data.data}"
+             data=[${data.data}:"${conf}"]
+             echo "${data}"
              writeYaml(file:'kube/config-map.yaml',data:"${data}",overwrite:true)
              datas=readYaml(file:'kube/config-map.yaml')
              echo "${datas}"

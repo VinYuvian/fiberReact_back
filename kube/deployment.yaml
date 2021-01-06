@@ -10,8 +10,9 @@ spec:
     metadata:
       name: fiber
     volumes:
-      configMaps:
-        - name: fiber-conf
+      - name: fiber-conf
+        configMaps:
+          name: fiber-conf
     containers:
       - name: fiber
         image: nginx

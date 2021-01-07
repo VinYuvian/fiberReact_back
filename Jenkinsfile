@@ -66,7 +66,12 @@ pipeline {
              data.data.env="${datas}"
              //datas="${data.data}"
              //echo "${data.data.env}"
-             writeYaml(file:'kube/config-maps.yaml.temp',data:"${data}",overwrite:true)
+             sh '''
+                if [ -e kube/config-map.yaml ]; then
+                    rm -f kube/config-map.yaml
+                fi
+                '''
+             writeYaml(file:'kube/config-map.yaml',data:"${data}",overwrite:true)
              env.data1=readYaml(file:'kube/config-maps.yaml.temp')
              echo "${data1}"
              //echo "${datas}"

@@ -63,8 +63,8 @@ pipeline {
              echo "$datas"
              data=readYaml(file:'kube/config-map.yaml.template')
              //echo "${data}"
-             //data.data.env="${datas}"
-             datas="${data.data}"
+             data.data.env="${datas}"
+             //datas="${data.data}"
              //echo "${data.data.env}"
              writeYaml(file:'kube/config-maps.yaml.temp',data:"${data}",overwrite:true)
              env.data1=readYaml(file:'kube/config-maps.yaml.temp')

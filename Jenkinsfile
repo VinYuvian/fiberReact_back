@@ -13,6 +13,12 @@ pipeline {
     }
   }
   stages {
+    stage('checkout'){
+      steps{
+        git branch:'main',url:'https://github.com/VinYuvian/fiberReact_back.git'
+        stash 'workspace'
+      }
+    }
     stage('Build') {
       steps {  // no container directive is needed as the maven container is the default
         sh "go version"   
@@ -54,6 +60,7 @@ pipeline {
     }
     stage('deploy to kubernetes'){
       steps{
+         unstash 'workspace'
          withCredentials([file(credentialsId:'fiberBackend',variable:'file')]){
            script{
              env.conf=sh(returnStdout:true,script:"cat $file")

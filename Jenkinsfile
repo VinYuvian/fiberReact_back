@@ -79,8 +79,10 @@ pipeline {
     }
     stage('deploy'){
         steps{
-          withKubeConfig(credentialsId:'kubeSecret',serverUrl:'https://5588ec42-bc21-4166-89c4-16b5b4c2eea3.k8s.ondigitalocean.com'){
-            sh 'kubectl cluster-info'
+          container('kubectl'){
+             withKubeConfig(credentialsId:'kubeSecret',serverUrl:'https://5588ec42-bc21-4166-89c4-16b5b4c2eea3.k8s.ondigitalocean.com'){
+                 sh 'kubectl cluster-info'
+             }
           }
           //kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)
         }

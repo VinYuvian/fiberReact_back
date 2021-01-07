@@ -81,9 +81,10 @@ pipeline {
              //writeYaml charset: 'string', data: "${data}", file: 'kube/config-map.yaml'
              env.data1=readYaml(file:'kube/config-maps.yaml.temp')
              //env.datas=sh(returnStdout:true,script:"cat /kube/config-maps.yaml")
-             configFileProvider([configFile(fileId: 'conf-map', targetLocation: 'kube/config-map.yaml', variable: 'config')]) {
+             configFileProvider([configFile(fileId: 'conf-map', targetLocation: 'kube/config-maps.yaml.temp', variable: 'config')]) {
                   echo "$config"  // some block
              }
+             env.data1=readYaml(file:'kube/config-maps.yaml.temp')
              echo "${data1}"
              //echo "${datas}"
              //data=readYaml(file:'kube/config-maps.yaml')

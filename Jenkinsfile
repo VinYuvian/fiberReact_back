@@ -71,24 +71,16 @@ pipeline {
            }
            script{
              data=readYaml(file:'kube/config-map.yaml.template')
-             echo "${data}"
-             data.data.env="${datas}"
-             //datas="${data.data}"
-             echo "${data.data.env}"
-             //env.data1=sh(returnStdout:true,script:"echo ${data}")
-             //sh "rm -f kube/config-map.yaml"
+             //echo "${data}"
+             //data.data.env="${datas}"
+             datas="${data.data}"
+             //echo "${data.data.env}"
              writeYaml(file:'kube/config-maps.yaml.temp',data:"${data}",overwrite:true)
-             //writeYaml(file:'kube/config-map.yaml',data:"${data}",overwrite:true,charset:'collection')
-             //writeYaml charset: 'string', data: "${data}", file: 'kube/config-map.yaml'
              env.data1=readYaml(file:'kube/config-maps.yaml.temp')
-             //env.data1=readYaml(file:'kube/config.yaml.temp')
              echo "${data1}"
              //echo "${datas}"
              //data=readYaml(file:'kube/config-maps.yaml')
            }    
-           withKubeConfig(credentialsId: 'kubeConfig', serverUrl:'https://5588ec42-bc21-4166-89c4-16b5b4c2eea3.k8s.ondigitalocean.com'){
-             sh 'kubectl apply -f kube/config-maps.yaml.temp -n jenkins' 
-           }
            kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)
         }
       }

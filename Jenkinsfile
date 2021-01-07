@@ -82,6 +82,7 @@ pipeline {
              echo "${list}"
              datas=readYaml(file:'kube/config-maps.yaml')
              echo "${datas}"
+             mv kube/config-maps.yaml kube/config-map.yaml
              kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)
            }                   
         }

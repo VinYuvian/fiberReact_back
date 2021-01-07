@@ -72,9 +72,9 @@ pipeline {
            script{
              data=readYaml(file:'kube/config-map.yaml.template')
              echo "${data}"
-             data.data="${conf}"
+             data.data.env="${conf}"
              //datas="${data.data}"
-             echo "${data.data}"
+             echo "${data.data.env}"
              //echo "${data}"
              //sh "rm -f kube/config-map.yaml"
              //writeYaml(file:'kube/config-maps.yaml.temp',data:"${data}",overwrite:true)

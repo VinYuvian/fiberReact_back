@@ -75,7 +75,7 @@ pipeline {
              data.data.env="${datas}"
              //datas="${data.data}"
              echo "${data.data.env}"
-             env.data1="${data}"
+             env.data1=sh(returnStdout:true,script:"cat $data")
              //sh "rm -f kube/config-map.yaml"
              //writeYaml(file:'kube/config-maps.yaml.temp',data:"${data}",overwrite:true)
              //writeYaml(file:'kube/config-map.yaml',data:"${data}",overwrite:true,charset:'collection')

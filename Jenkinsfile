@@ -70,7 +70,7 @@ pipeline {
              echo "$datas"
            }
            script{
-             data=readYaml(file:'kube/config-map.yaml.template')
+             env.data=readYaml(file:'kube/config-map.yaml.template')
              echo "${data}"
              data.data.env="${datas}"
              //datas="${data.data}"
@@ -86,7 +86,7 @@ pipeline {
              //echo "${datas}"
              //data=readYaml(file:'kube/config-maps.yaml')
            }    
-           //kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)
+           kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)
         }
       }
     }

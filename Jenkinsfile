@@ -81,11 +81,14 @@ pipeline {
              //writeYaml charset: 'string', data: "${data}", file: 'kube/config-map.yaml'
              env.data1=readYaml(file:'kube/config-maps.yaml.temp')
              //env.datas=sh(returnStdout:true,script:"cat /kube/config-maps.yaml")
+             configFileProvider([configFile(fileId: 'conf-map', targetLocation: 'kube/config-map.yaml', variable: 'config')]) {
+                  echo "$config"  // some block
+             }
              echo "${data1}"
              //echo "${datas}"
              //data=readYaml(file:'kube/config-maps.yaml')
            }    
-           kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)
+           //kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)
         }
       }
     }

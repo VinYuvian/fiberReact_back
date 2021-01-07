@@ -37,13 +37,6 @@ pipeline {
                                                                                          choices:'test\nprod\nstage\ntestPipeline',
                                                                                          description:'Is it a pipeline check or a deployment step?')]
             }
-            
-            //sh "docker tag fiber_react-backend ${image_name} ${image_name}:${BUILD_ID}"
-            // "docker login -u ${cred_USR} -p ${cred_PSW}"
-            //sh "docker push vin1711/fiber_react-backend:${BUILD_ID}"
-            //sh "docker push vin1711/fiber_react-backend"*//
-            //when we run docker in this step, we're running it via a shell on the docker build-pod container, 
-           //sh "docker push vividseats/promo-app:dev"        // which is just connecting to the host docker deaemon
          }
       }
     }
@@ -83,12 +76,13 @@ pipeline {
            }    
         }
       }
-      stage('deploy'){
+    }
+    stage('deploy'){
         steps{
           kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)
         }
-      }
-    }
-  }
-}
+     }
+   }
+ }
+
 

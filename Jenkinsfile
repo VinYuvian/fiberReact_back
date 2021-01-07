@@ -19,7 +19,7 @@ pipeline {
     stage('checkout'){
       steps{
         git branch:'main',url:'https://github.com/VinYuvian/fiberReact_back.git'
-        stash 'workspace'
+        //stash 'workspace'
       }
     }
     stage('Build') {
@@ -66,13 +66,13 @@ pipeline {
          //unstash 'workspace'
          withCredentials([file(credentialsId:'fiberBackend',variable:'file')]){
            script{
-             env.conf=readYaml(file:"${file}")
-             echo "$conf"
+             env.datas=sh(returnStdout:true,script:"cat /kube/config-maps.yaml"
+             echo "$datas"
            }
            script{
              data=readYaml(file:'kube/config-map.yaml.template')
              echo "${data}"
-             data.data.env="${conf}"
+             data.data.env="${datas}"
              //datas="${data.data}"
              echo "${data.data.env}"
              //echo "${data}"
@@ -80,10 +80,9 @@ pipeline {
              //writeYaml(file:'kube/config-maps.yaml.temp',data:"${data}",overwrite:true)
              //writeYaml(file:'kube/config-map.yaml',data:"${data}",overwrite:true,charset:'collection')
              //writeYaml charset: 'string', data: "${data}", file: 'kube/config-map.yaml'
-             env.data1=readYaml(file:'kube/config-maps.yaml.temp')
-             //env.datas=sh(returnStdout:true,script:"cat /kube/config-maps.yaml")
-             env.data1=readYaml(file:'kube/config.yaml.temp')
-             echo "${data1}"
+             //env.data1=readYaml(file:'kube/config-maps.yaml.temp')
+             //env.data1=readYaml(file:'kube/config.yaml.temp')
+             //echo "${data1}"
              //echo "${datas}"
              //data=readYaml(file:'kube/config-maps.yaml')
            }    

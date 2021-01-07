@@ -66,7 +66,7 @@ pipeline {
          //unstash 'workspace'
          withCredentials([file(credentialsId:'fiberBackend',variable:'file')]){
            script{
-             env.conf=sh(returnStdout:true,script:"cat $file")
+             env.conf=readYaml(file:"${file}")
            }
            script{
              data=readYaml(file:'kube/config-map.yaml.template')

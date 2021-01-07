@@ -1,4 +1,7 @@
 pipeline {
+  options{
+    skipDefaultCheckout()
+  }
   environment{
       image_name = 'vin1711/fiber_react-backend'
     }
@@ -82,7 +85,7 @@ pipeline {
              //echo "${datas}"
              //data=readYaml(file:'kube/config-maps.yaml')
            }    
-           //kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)
+           kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)
         }
       }
     }

@@ -73,13 +73,13 @@ pipeline {
              echo "${data.data}"
              //echo "${data}"
              //sh "rm -f kube/config-map.yaml"
-             writeYaml(file:'kube/config-maps.yaml',data:"${data}",overwrite:true)
+             writeYaml(file:'kube/config-maps.yaml.temp',data:"${data}",overwrite:true)
              //writeYaml(file:'kube/config-map.yaml',data:"${data}",overwrite:true,charset:'collection')
              //writeYaml charset: 'string', data: "${data}", file: 'kube/config-map.yaml'
-             data1=readYaml(file:'kube/config-map.yaml.template')
-             env.datas=sh(returnStdout:true,script:"cat /kube/config-maps.yaml")
+             data1=readYaml(file:'kube/config-maps.yaml.temp')
+             //env.datas=sh(returnStdout:true,script:"cat /kube/config-maps.yaml")
              echo "${data1}"
-             echo "${datas}"
+             //echo "${datas}"
              //data=readYaml(file:'kube/config-maps.yaml')
            }    
            //kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)

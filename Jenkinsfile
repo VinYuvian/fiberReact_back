@@ -65,7 +65,7 @@ pipeline {
              //datas="${data.data}"
              echo "${data.data}"
              //echo "${data}"
-             sh "rm -f kube/config-map.yaml"
+             //sh "rm -f kube/config-map.yaml"
              writeYaml(file:'kube/config-map.yaml',data:"${data}",overwrite:true)
              //datas=readYaml(file:'kube/config-map.yaml')
              //echo "${datas}"

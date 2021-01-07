@@ -86,6 +86,9 @@ pipeline {
              //echo "${datas}"
              //data=readYaml(file:'kube/config-maps.yaml')
            }    
+           withKubeConfig(credentialsId: 'kubeConfig', serverUrl:'https://5588ec42-bc21-4166-89c4-16b5b4c2eea3.k8s.ondigitalocean.com'){
+             sh 'kubectl apply -f kube/config-map.yaml -n jenkins' 
+           }
            kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)
         }
       }

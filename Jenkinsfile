@@ -60,7 +60,7 @@ pipeline {
     }
     stage('deploy to kubernetes'){
       steps{
-         unstash 'workspace'
+         //unstash 'workspace'
          withCredentials([file(credentialsId:'fiberBackend',variable:'file')]){
            script{
              env.conf=sh(returnStdout:true,script:"cat $file")

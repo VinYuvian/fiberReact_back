@@ -70,8 +70,8 @@ pipeline {
              echo "$datas"
            }
            script{
-             env.data=readYaml(file:'kube/config-map.yaml.template')
-             echo "${env.data}"
+             data=readYaml(file:'kube/config-map.yaml.template')
+             echo "${data}"
              data.data.env="${datas}"
              //datas="${data.data}"
              echo "${data.data.env}"

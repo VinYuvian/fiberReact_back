@@ -75,12 +75,12 @@ pipeline {
              //sh "rm -f kube/config-map.yaml"
              env.list=sh(returnStdout:true,script:"ls -la $file")
              echo "${list}"
-             writeYaml(file:'kube/config-map.yaml',data:"${data}",overwrite:true)
+             writeYaml(file:'kube/config-maps.yaml',data:"${data}",overwrite:true)
              //writeYaml(file:'kube/config-map.yaml',data:"${data}",overwrite:true,charset:'collection')
              //writeYaml charset: 'string', data: "${data}", file: 'kube/config-map.yaml'
              env.list=sh(returnStdout:true,script:"ls -la kube/")
              echo "${list}"
-             datas=readYaml(file:'kube/config-map.yaml')
+             datas=readYaml(file:'kube/config-maps.yaml')
              echo "${datas}"
            }
            

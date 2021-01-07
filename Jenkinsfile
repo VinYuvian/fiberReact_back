@@ -83,7 +83,7 @@ pipeline {
              //echo "${list}"
              //data=readYaml(file:'kube/config-maps.yaml')
            }    
-           //kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)
+           kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)
         }
       }
     }

@@ -71,7 +71,7 @@ pipeline {
            script{
              data=readYaml(file:'kube/config-map.yaml.template')
              echo "${data}"
-             data.data="[${conf}]"
+             data.data="${conf}"
              //datas="${data.data}"
              echo "${data.data}"
              //echo "${data}"

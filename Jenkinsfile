@@ -66,7 +66,7 @@ pipeline {
              env.conf=sh(returnStdout:true,script:"cat $file")
            }
            script{
-             data=readYaml(file:'kube/config-map.yaml.template')
+             env.data=readYaml(file:'kube/config-map.yaml.template')
              echo "${data.data}"
              data.data="${conf}"
              //datas="${data.data}"

@@ -67,6 +67,7 @@ pipeline {
            }
            script{
              data=readYaml(file:'kube/config-map.yaml.template')
+             echo "${data}"
              echo "${data.data.env}"
              data.data.env="${conf}"
              //datas="${data.data}"
@@ -81,7 +82,6 @@ pipeline {
              //env.list=sh(returnStdout:true,script:"ls -la kube/")
              //echo "${list}"
              //data=readYaml(file:'kube/config-maps.yaml')
-             echo "${data}"
            }    
            //kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)
         }

@@ -60,7 +60,7 @@ pipeline {
            }
            script{
              data=readYaml(file:'kube/config-map.yaml')
-             //echo "${data.data}"
+             echo "${data.data}"
              data.data="${conf}"
              //datas="${data.data}"
              echo "${data.data}"

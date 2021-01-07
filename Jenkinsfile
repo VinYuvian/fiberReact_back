@@ -81,10 +81,11 @@ pipeline {
              //echo "${datas}"
              //data=readYaml(file:'kube/config-maps.yaml')
            }    
-           withKubeConfig(credentialsId:'kubeSecret',serverUrl:'https://5588ec42-bc21-4166-89c4-16b5b4c2eea3.k8s.ondigitalocean.com'){
-             sh 'kubectl get pods'
-           }
-           kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)
+        }
+      }
+      stage('deploy'){
+        steps{
+          kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)
         }
       }
     }

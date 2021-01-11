@@ -6,9 +6,6 @@ spec:
       image: golang:alpine3.12
       command: ["tail", "-f", "/dev/null"]  # this or any command that is bascially a noop is required, this is so that you don't overwrite the entrypoint of the base container
       imagePullPolicy: Always # use cache or pull image for agent
-      volumeMounts:
-      - name: jenkins-home
-        mountPath: /var/go/app
       resources:  # limits the resources your build contaienr
         requests:
           memory: "300Mi"
@@ -16,13 +13,6 @@ spec:
         limits:
           memory: "300Mi"
           cpu: "1"
-    - name: kubectl
-      image: bitnami/kubectl
-      command: ["tail", "-f", "/dev/null"]
-      imagePullPolicy: Always
-      volumeMounts:
-        - name: docker
-          mountPath: /var/run/docker.sock
     - name: docker
       image: docker:18.06.1
       command: ["tail", "-f", "/dev/null"]

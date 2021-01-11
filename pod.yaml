@@ -24,7 +24,4 @@ spec:
     - name: docker
       hostPath:
         path: /var/run/docker.sock
-    - name: jenkins-home
-      hostPath:
-        path: /jenkins
         

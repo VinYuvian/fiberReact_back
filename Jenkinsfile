@@ -3,8 +3,8 @@ pipeline {
     skipDefaultCheckout()
   }
   environment{
-      db_user = crdentials('db_user')
-      db_info = crdentials('mongo_db_details')
+      db_user = credentials('db_user')
+      db_info = credentials('mongo_db_details')
       image_name = 'vin1711/fiber_react-backend'
     }
   agent {

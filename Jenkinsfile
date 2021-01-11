@@ -51,8 +51,8 @@ pipeline {
       steps{
         withCredentials([usernamePassword(credentialsId:'dockerCred',usernameVariable:'user',passwordVariable:'password')]){
               sh 'docker login -u $user -p $password'
-              sh "docker push vin1711/fiber_react-backend:${BUILD_ID}"
-              sh "docker push vin1711/fiber_react-backend"
+              sh "docker push ${image_name}:${BUILD_ID}"
+              sh "docker push ${image_name}:latest"
             }
       }
     }

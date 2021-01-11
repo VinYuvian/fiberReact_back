@@ -5,7 +5,7 @@ metadata:
   namespace: jenkins
 data:
   env: |
-    DB_CONN_STRING=db-string
-    DATABASE=dummy
-    USERNAME=dummy
-    PASSWORD=dummy
+    DB_CONN_STRING=$DB_CONN_STRING
+    DATABASE=$DB_NAME
+    USERNAME=$DB_USER
+    PASSWORD=$DB_PASSWD

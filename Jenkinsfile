@@ -57,10 +57,9 @@ pipeline {
       }
     }
     stage('deploy to kubernetes'){
-      steps{
+      steps{ 
          //unstash 'workspace'
            kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)
-        }
       }
     }
    }

@@ -36,6 +36,6 @@ spec:
   ports:
     - name: fiber
       targetPort: 3000
-      protocol: tcp
+      protocol: "TCP"
       port: 3000
-  type: ClusterIp
+  type: ClusterIP

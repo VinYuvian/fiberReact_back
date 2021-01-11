@@ -3,6 +3,8 @@ pipeline {
     skipDefaultCheckout()
   }
   environment{
+      db_user = crdentials('db_user')
+      db_info = crdentials('mongo_db_details')
       image_name = 'vin1711/fiber_react-backend'
     }
   agent {
@@ -57,26 +59,6 @@ pipeline {
     stage('deploy to kubernetes'){
       steps{
          //unstash 'workspace'
-         withCredentials([file(credentialsId:'fiberBackend',variable:'file')]){
-           script{
-             env.datas=sh(returnStdout:true,script:"cat $file")
-             echo "$datas"
-             data=readYaml(file:'kube/config-map.yaml.template')
-             //echo "${data}"
-             data.data.env="${datas}"
-             //datas="${data.data}"
-             //echo "${data.data.env}"
-             sh '''
-                if [ -e kube/config-map.yaml ]; then
-                    rm -f kube/config-map.yaml
-                fi
-                '''
-             writeYaml(file:'kube/config-map.yaml',data:"${data}",overwrite:true)
-             env.data1=readYaml(file:'kube/config-map.yaml')
-             echo "${data1}"
-             //echo "${datas}"
-             //data=readYaml(file:'kube/config-maps.yaml')
-           }    
            kubernetesDeploy(configs: '**/*.yaml', kubeconfigId:'kubeConfig',secretNamespace:'jenkins',enableConfigSubstitution:true)
         }
       }

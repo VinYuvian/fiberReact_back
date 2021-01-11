@@ -49,11 +49,13 @@ pipeline {
         }
       }
       steps{
-        withCredentials([usernamePassword(credentialsId:'dockerCred',usernameVariable:'user',passwordVariable:'password')]){
-              sh 'docker login -u $user -p $password'
-              sh "docker push ${image_name}:${BUILD_ID}"
-              sh "docker push ${image_name}:latest"
+        container('docker'){
+            withCredentials([usernamePassword(credentialsId:'dockerCred',usernameVariable:'user',passwordVariable:'password')]){
+                sh 'docker login -u $user -p $password'
+                sh "docker push ${image_name}:${BUILD_ID}"
+                sh "docker push ${image_name}:latest"
             }
+        }
       }
     }
     stage('deploy to kubernetes'){

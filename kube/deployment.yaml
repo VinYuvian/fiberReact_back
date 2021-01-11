@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: fiber
-        image: ${image_name}:${BUILD_ID}
+        image: ${image_name}:latest
         ports:
         - name: http 
           containerPort: 3000

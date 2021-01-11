@@ -25,3 +25,19 @@ spec:
       - name: fiber-conf
         configMap:
           name: fiber-conf
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fiber-service
+  label:
+    app: backend
+spec:
+  selector:
+    name: fiber
+  ports:
+    - name: fiber
+      targetPort: 3000
+      protocol: tcp
+      port: 3000
+  type: ClusterIp

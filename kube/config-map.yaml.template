@@ -6,6 +6,6 @@ metadata:
 data:
   env: |
     DB_CONN_STRING=$DB_CONN_STRING
-    DATABASE=$DB_NAME
-    USERNAME=$DB_USER
-    PASSWORD=$DB_PASSWD
+    DATABASE=$db_user_usr
+    USERNAME=$db_user_psw
+    PASSWORD=$db_info_psw

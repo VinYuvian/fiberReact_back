@@ -4,7 +4,7 @@ metadata:
   name: fiber-conf
   namespace: jenkins
 data:
-  env: |
+  config.env: |
     DB_CONN_STRING=$DB_CONN_STRING
     DATABASE=$db_user_usr
     USERNAME=$db_user_psw

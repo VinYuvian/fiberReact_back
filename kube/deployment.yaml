@@ -20,7 +20,7 @@ spec:
           containerPort: 3000
         volumeMounts:
         - name: fiber-conf
-          mountPath: .env
+          mountPath: /
       volumes:
       - name: fiber-conf
         configMap:

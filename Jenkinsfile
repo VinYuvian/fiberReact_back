@@ -1,6 +1,7 @@
 pipeline {
   options{
     skipDefaultCheckout()
+    buildDiscarder(logRotator(numToKeepStr: '2', artifactNumToKeepStr: '2',daysToKeepStr: '1'))
   }
   environment{
       db_user = credentials('db_user')
@@ -10,10 +11,10 @@ pipeline {
   agent {
     kubernetes {
       cloud 'kubernetes'
-      label 'promo-app'  // all your pods will be named with this prefix, followed by a unique id
+      label 'fiber-agent'  // all your pods will be named with this prefix, followed by a unique id
       idleMinutes 5  // how long the pod will live after no jobs have run on it
       yamlFile 'pod.yaml'  // path to the pod definition relative to the root of our project 
-      defaultContainer 'golang'  // define a default container if more than a few stages use it, will default to jnlp container
+      defaultContainer 'golang'  // define a default container 
       podRetention never()
     }
   }
@@ -25,7 +26,7 @@ pipeline {
       }
     }
     stage('Build') {
-      steps {  // no container directive is needed as the maven container is the default
+      steps {  // no container directive is needed as the golang container is the default
         sh "go version"   
         sh "go build -o Fiber_${BUILD_ID}"
       }
@@ -49,7 +50,7 @@ pipeline {
         }
       }
       steps{
-        container('docker'){
+        container('docker'){ //need to provide container info as the docker commands need to be executed in docker container
             withCredentials([usernamePassword(credentialsId:'dockerCred',usernameVariable:'user',passwordVariable:'password')]){
                 sh 'docker login -u $user -p $password'
                 sh "docker push ${image_name}:${BUILD_ID}"

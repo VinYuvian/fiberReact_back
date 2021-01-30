@@ -1,4 +1,4 @@
-//Descriptuon: pipeline to deply golang backend application to kubernetes
+//Descriptuon: "pipeline to deply golang backend application to kubernetes"
 pipeline {
   options{
     skipDefaultCheckout()

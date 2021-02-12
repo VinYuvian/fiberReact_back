@@ -26,7 +26,7 @@ spec:
       - name: fiber-conf
         configMap:
           name: fiber-conf
-      
+      dnsPolicy: Default
 ---
 apiVersion: v1
 kind: Service

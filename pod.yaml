@@ -11,7 +11,7 @@ spec:
           memory: "300Mi"
           cpu: "1"
         limits:
-          memory: "300Mi"
+          memory: "400Mi"
           cpu: "1"
     - name: docker
       image: docker:18.06.1

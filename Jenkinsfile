@@ -6,7 +6,7 @@ pipeline {
   }
   environment{
       db_user = credentials('db_user')
-      db_info = credentials('mongo_db_details')
+      db_info = credentials('db_info')
       image_name = 'vin1711/fiber_react-backend'
     }
   agent {

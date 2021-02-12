@@ -7,7 +7,7 @@ pipeline {
   environment{
       db_user = credentials('db_user')
       db_info = credentials('db_info')
-      image_name = 'vin1711/fiber_react-backend'
+      image_name = 'vin1711/fiber-backend'
     }
   agent {
     kubernetes {
